@@ -1,0 +1,6 @@
+<RCC>
+    <qresource prefix="/">
+        <file>enquiz.ico</file>
+        <file>enquiz.icns</file>
+    </qresource>
+</RCC>
