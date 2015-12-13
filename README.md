@@ -5,6 +5,6 @@ Requirement:
 -- Qt Library >= 4.8
 
 
-Baby is coming, mother and I love you. Wish you safe and healthy.
+Our little princess, mother and I love you. Wish you safe and healthy, pretty and wise.
 
 
