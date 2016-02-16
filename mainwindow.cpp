@@ -232,8 +232,10 @@ void MainWindow::exportthemact(QString testfilepath, QString answerfilepath) {
 		query.prepare("select id, word, quiz, answer from enquiz");
 		if (query.exec()) {
 			while (query.next()) {
-				quizstr += QString("%1. %2\n").arg(query.value("id").toString()).arg(query.value("quiz").toString());
-				answerstr += QString("%1. %2\n").arg(query.value("id").toString()).arg(query.value("answer").toString());
+				//quizstr += QString("%1. %2\n").arg(query.value("id").toString()).arg(query.value("quiz").toString());
+				//answerstr += QString("%1. %2\n").arg(query.value("id").toString()).arg(query.value("answer").toString());
+				quizstr += QString("%1. %2\n").arg(query.value(1).toString()).arg(query.value(3).toString());
+				answerstr += QString("%1. %2\n").arg(query.value(1).toString()).arg(query.value(4).toString());
 			}
 			if ( testfile.open(QIODevice::ReadWrite | QIODevice::Truncate | QIODevice::Text) ) {
 				QTextStream stream( &testfile );
