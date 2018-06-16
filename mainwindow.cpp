@@ -14,6 +14,8 @@ MainWindow::MainWindow(QWidget *parent) :
 	connect(this, SIGNAL(exportWordsPaper()), this, SLOT(exportWordsPaperAct()));
 	connect(this, SIGNAL(beginExport(QString)), this, SLOT(exportQuizFiles(QString)));
 	connect(this, SIGNAL(exportthem(QString,QString)), this, SLOT(exportthemact(QString,QString)));
+
+	dbStorePath = QDir::homePath()+ QDir::separator() + "h" + QDir::separator() + "EnQuizData";
 }
 
 MainWindow::~MainWindow()
@@ -131,9 +133,9 @@ void MainWindow::on_pushButton_addtoquiz_clicked() {
 }
 
 void MainWindow::quizToDbAct(QString word, QString quiz, QString answer) {
-	QDir dbdir(QDir::homePath()+ QDir::separator() +"cherry");
+	QDir dbdir(dbStorePath);
 	if (!dbdir.exists()) {
-		dbdir.mkdir(QDir::homePath()+ QDir::separator() +"cherry");
+		dbdir.mkdir(dbStorePath);
 	}
 	QSqlDatabase db;
 	if (QSqlDatabase::contains("sqconn")) {
@@ -169,7 +171,7 @@ void MainWindow::quizToDbAct(QString word, QString quiz, QString answer) {
 void MainWindow::on_pushButton_exporttofile_clicked() {
 	unsigned int ws = 0;
 	QString wordsum = "";
-	QDir dbdir(QDir::homePath()+ QDir::separator() +"cherry");
+	QDir dbdir(dbStorePath);
 	QSqlDatabase db;
 	if (QSqlDatabase::contains("sqconn")) {
 		db = QSqlDatabase::database("sqconn");
@@ -223,7 +225,7 @@ void MainWindow::exportthemact(QString testfilepath, QString answerfilepath) {
 		db = QSqlDatabase::addDatabase("QSQLITE", "sqconn");
 	}
 	db.setHostName("localhost");
-	QDir dbdir(QDir::homePath()+ QDir::separator() +"cherry");
+	QDir dbdir(dbStorePath);
 	db.setDatabaseName(dbdir.path()+ QDir::separator() +"enquiz.db");
 	if (! db.open()) {
 		QMessageBox::information(this, "DB Error", "Sqlite Database Open Error");
