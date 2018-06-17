@@ -70,6 +70,7 @@ private slots:
 private:
 	Ui::MainWindow *ui;
 	QWebView *webview;
+	QString dbStorePath;
 };
 
 
